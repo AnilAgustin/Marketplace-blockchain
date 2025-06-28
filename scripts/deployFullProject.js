@@ -1,4 +1,5 @@
 const { ethers } = require("hardhat");
+const fs = require("fs");
 
 async function main() {
     // =======================================================================
@@ -54,6 +55,18 @@ async function main() {
     console.log(`   - MyNFT:       ${nftAddress}`);
     console.log(`   - Marketplace: ${marketplaceAddress}`);
     console.log(" ");
+
+    // Guardar las direcciones para que el frontend las utilice
+    const addresses = {
+        MyToken: tokenAddress,
+        MyNFT: nftAddress,
+        Marketplace: marketplaceAddress,
+    };
+    fs.writeFileSync(
+        "frontend/addresses.json",
+        JSON.stringify(addresses, null, 2)
+    );
+    console.log("✅ Saved contract addresses to frontend/addresses.json");
 
     // Opcional: Mintear un NFT de prueba y aprobar el Marketplace para transferirlo
     const [deployer] = await ethers.getSigners();
