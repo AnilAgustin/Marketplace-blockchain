@@ -1,13 +1,25 @@
-# Sample Hardhat Project
+# NFT Marketplace Example
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+This repository contains a simple NFT marketplace project using Hardhat.
 
-Try running some of the following tasks:
+## Deployment
 
-```shell
-npx hardhat help
+Use the provided script to deploy all contracts and generate `frontend/addresses.json`:
+
+```bash
+npx hardhat run scripts/deployFullProject.js --network localhost
+```
+
+The script deploys `MyToken`, `MyNFT`, and `Marketplace`, mints a test NFT, and writes their addresses to `frontend/addresses.json`.
+
+## Frontend
+
+Open `frontend/index.html` in a browser with MetaMask connected to the same network. The app reads contract addresses from `addresses.json`.
+
+## Tests
+
+Run the standard Hardhat tests with:
+
+```bash
 npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
 ```

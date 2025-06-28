@@ -25,6 +25,13 @@ contract Marketplace is Ownable {
     // Mapping from tokenId to its ListedItem details
     mapping(uint256 => ListedItem) public listedItems;
 
+    /// @dev Compatibilidad con versiones antiguas del frontend que
+    ///      esperaban una función `idToListing`. Devuelve el struct
+    ///      `ListedItem` correspondiente al token indicado.
+    function idToListing(uint256 _tokenId) external view returns (ListedItem memory) {
+        return listedItems[_tokenId];
+    }
+
     // Events to be emitted for frontend
     event NFTListed(uint256 indexed tokenId, address indexed seller, uint256 price);
     event NFTBought(uint256 indexed tokenId, address indexed buyer, uint256 price);
